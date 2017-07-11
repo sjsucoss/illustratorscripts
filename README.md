@@ -18,12 +18,14 @@ Illustrator, which should be in one of these locations:
 	</tr>
 </table>
 
-People using other versions of Illustrator may need to change "CC" in the above
-paths to "C6," "C5," etc.
+People using other versions of Illustrator may need to change &ldquo;CC&rdquo; in the above
+paths to &ldquo;C6,&rdquo; &ldquo;C5,&rdquo; etc.
 
 
 ## js
 
-bar
+To run this script in Illustrator, use
+<strong>File</strong> &gt; <strong>Scripts</strong> &gt; <strong>Other Scripts</strong>
+and navigate to the location of this file.
 
 
