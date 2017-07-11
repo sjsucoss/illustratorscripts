@@ -71,180 +71,180 @@ var CoSS = this.CoSS || {};
 (function (my) {
     'use strict';
 
-	var defaults = {
-			width: 180,      // Width is fairly standard; height is variable!
-			radius: 12,      // Radius of round corners of background rectangle
-			margin: 14,      // Top margin
-			red: 218,        // RGB for goldenrod, used as the button's
-			green: 165,      //   background color--This matches the vertical
-			blue: 32         //   band on the left-hand side of the page.
-			shift: 30,       // How much to +/- for each color in gradients
-			textFont: 'MyriadPro-Semibold',
-			textRed: 255,    // RGB      (used for button text)
-			textGreen: 255,  //   for
-			textBlue: 255,   //   white
-			zoom: 1,         // 100%, i.e., actual size
-			colorMode: DocumentColorSpace.RGB
-		},
-		gold = {
-			red: 199,        // RGB
-			green: 153,      //   for
-			blue: 0,         //   gold as defined in current SJSU style
-		};
-		blue = {
-			red: 0,          // RGB
-			green: 90,       //   for
-			blue: 139        //   blue as defined in current SJSU style
-		};
+    var defaults = {
+            width: 180,      // Width is fairly standard; height is variable!
+            radius: 12,      // Radius of round corners of background rectangle
+            margin: 14,      // Top margin
+            red: 218,        // RGB for goldenrod, used as the button's
+            green: 165,      //   background color--This matches the vertical
+            blue: 32         //   band on the left-hand side of the page.
+            shift: 30,       // How much to +/- for each color in gradients
+            textFont: 'MyriadPro-Semibold',
+            textRed: 255,    // RGB      (used for button text)
+            textGreen: 255,  //   for
+            textBlue: 255,   //   white
+            zoom: 1,         // 100%, i.e., actual size
+            colorMode: DocumentColorSpace.RGB
+        },
+        gold = {
+            red: 199,        // RGB
+            green: 153,      //   for
+            blue: 0,         //   gold as defined in current SJSU style
+        };
+        blue = {
+            red: 0,          // RGB
+            green: 90,       //   for
+            blue: 139        //   blue as defined in current SJSU style
+        };
 
-	function Button(title, text, size, height, options) {
-		my.extend(this, defaults, options || {});
-		this.title = title;
-		this.text = text;
-		this.size = size;
-		this.height = height;
-	}
+    function Button(title, text, size, height, options) {
+        my.extend(this, defaults, options || {});
+        this.title = title;
+        this.text = text;
+        this.size = size;
+        this.height = height;
+    }
 
-	Button.prototype.addDocument = function () {
-		this.document = app.documents.addDocument('', this.documentPreset());
-		this.document.activeView.zoom = this.zoom;
-		this.document.defaultStrokeColor = new NoColor();
-		this.setGradient('normal', this.shift);
-		this.setGradient('hover', -this.shift);
-		this.setCharacterStyle('button');
-		this.setParagraphStyle('button');
-		this.setLayer('hover');
-		this.addBackground('hover');
-		this.addText();
-		this.addLayer('normal');
-		this.addBackground('normal');
-		this.addText();
-	};
+    Button.prototype.addDocument = function () {
+        this.document = app.documents.addDocument('', this.documentPreset());
+        this.document.activeView.zoom = this.zoom;
+        this.document.defaultStrokeColor = new NoColor();
+        this.setGradient('normal', this.shift);
+        this.setGradient('hover', -this.shift);
+        this.setCharacterStyle('button');
+        this.setParagraphStyle('button');
+        this.setLayer('hover');
+        this.addBackground('hover');
+        this.addText();
+        this.addLayer('normal');
+        this.addBackground('normal');
+        this.addText();
+    };
 
-	Button.prototype.documentPreset = function () {
-		var preset = new DocumentPreset();
+    Button.prototype.documentPreset = function () {
+        var preset = new DocumentPreset();
 
-		preset.title = this.title + '_' + this.width + 'x' + this.height;
-		preset.colorMode = this.colorMode;
-		preset.width = this.width;
-		preset.height = this.height;
+        preset.title = this.title + '_' + this.width + 'x' + this.height;
+        preset.colorMode = this.colorMode;
+        preset.width = this.width;
+        preset.height = this.height;
 
-		return preset;
-	};
+        return preset;
+    };
 
-	Button.prototype.setGradient = function (name, shift) {
-		var gradient = this.document.gradients.add();
+    Button.prototype.setGradient = function (name, shift) {
+        var gradient = this.document.gradients.add();
 
-		gradient.name = name;
-		gradient.type = GradientType.LINEAR;
-		gradient.gradientStops[0].rampPoint = 0;
-		gradient.gradientStops[0].midPoint = 50;
-		gradient.gradientStops[0].color = my.rgbShift(
-			this.red, this.green, this.blue, shift);
-		gradient.gradientStops[1].rampPoint = 100;
-		gradient.gradientStops[1].color = my.rgbShift(
-			this.red, this.green, this.blue, -shift);
-	};
+        gradient.name = name;
+        gradient.type = GradientType.LINEAR;
+        gradient.gradientStops[0].rampPoint = 0;
+        gradient.gradientStops[0].midPoint = 50;
+        gradient.gradientStops[0].color = my.rgbShift(
+            this.red, this.green, this.blue, shift);
+        gradient.gradientStops[1].rampPoint = 100;
+        gradient.gradientStops[1].color = my.rgbShift(
+            this.red, this.green, this.blue, -shift);
+    };
 
-	Button.prototype.getGradient = function (name) {
-		return this.document.gradients.getByName(name);
-	};
+    Button.prototype.getGradient = function (name) {
+        return this.document.gradients.getByName(name);
+    };
 
-	Button.prototype.setCharacterStyle = function (name) {
-		var style = this.document.characterStyles.add(name),
-			attributes = style.characterAttributes;
+    Button.prototype.setCharacterStyle = function (name) {
+        var style = this.document.characterStyles.add(name),
+            attributes = style.characterAttributes;
 
-		attributes.textFont = app.textFonts.getByName(this.textFont);
-		attributes.size = this.size;
-		attributes.fillColor =
-			my.rgb(this.textRed, this.textGreen, this.textGreen);
-	};
-		
-	Button.prototype.getCharacterStyle = function (name) {
-		return this.document.characterStyles.getByName(name);
-	};
+        attributes.textFont = app.textFonts.getByName(this.textFont);
+        attributes.size = this.size;
+        attributes.fillColor =
+            my.rgb(this.textRed, this.textGreen, this.textGreen);
+    };
+        
+    Button.prototype.getCharacterStyle = function (name) {
+        return this.document.characterStyles.getByName(name);
+    };
 
-	Button.prototype.setParagraphStyle = function (name) {
-		var style = this.document.paragraphStyles.add(name),
-			attributes = style.paragraphAttributes;
+    Button.prototype.setParagraphStyle = function (name) {
+        var style = this.document.paragraphStyles.add(name),
+            attributes = style.paragraphAttributes;
 
-		attributes.justification = Justification.CENTER;
-	}
+        attributes.justification = Justification.CENTER;
+    }
 
-	Button.prototype.getParagraphStyle = function (name) {
-		return this.document.paragraphStyles.getByName(name);
-	}
+    Button.prototype.getParagraphStyle = function (name) {
+        return this.document.paragraphStyles.getByName(name);
+    }
 
-	Button.prototype.setLayer = function (name) {
-		if (this.document.layers.length == 0) {
-			this.document.layers.add();
-		}
-		this.document.activeLayer.name = name;
-	};
+    Button.prototype.setLayer = function (name) {
+        if (this.document.layers.length == 0) {
+            this.document.layers.add();
+        }
+        this.document.activeLayer.name = name;
+    };
 
-	Button.prototype.addLayer = function (name) {
-		var layer = this.document.layers.add()
+    Button.prototype.addLayer = function (name) {
+        var layer = this.document.layers.add()
 
-		layer.name = name;
-	};
+        layer.name = name;
+    };
 
-	Button.prototype.gradientColor = function (name) {
-		var color = new GradientColor();
-	
-		color.gradient = this.getGradient(name);
-		
-		return color;
-	};
+    Button.prototype.gradientColor = function (name) {
+        var color = new GradientColor();
+    
+        color.gradient = this.getGradient(name);
+        
+        return color;
+    };
 
-	Button.prototype.addBackground = function (type) {
-		var width = this.width,
-			height = this.height,
-			top = height,
-			left = 0,
-			horizontalRadius = this.radius,
-			verticalRadius = horizontalRadius,
-			rectangle = this.document.activeLayer.pathItems.roundedRectangle(
-				top, left, width, height, horizontalRadius, verticalRadius);
+    Button.prototype.addBackground = function (type) {
+        var width = this.width,
+            height = this.height,
+            top = height,
+            left = 0,
+            horizontalRadius = this.radius,
+            verticalRadius = horizontalRadius,
+            rectangle = this.document.activeLayer.pathItems.roundedRectangle(
+                top, left, width, height, horizontalRadius, verticalRadius);
 
-		rectangle.fillColor = this.gradientColor(type);
-		rectangle.rotate(-90, false, false,
-			true, false, Transformation.CENTER);
-	}
+        rectangle.fillColor = this.gradientColor(type);
+        rectangle.rotate(-90, false, false,
+            true, false, Transformation.CENTER);
+    }
 
-	Button.prototype.addText = function () {
-		var width = this.width,
-			height = this.height - this.margin,
-			top = height,
-			left = 0,
-			rectangle = this.document.activeLayer.pathItems.rectangle(
-				top, left, width, height),
-			textFrame = this.document.textFrames.areaText(rectangle),
-			paragraphs = textFrame.paragraphs,
-			characterStyle = this.getCharacterStyle('button'),
-			paragraphStyle = this.getParagraphStyle('button'),
-			i, limit;
+    Button.prototype.addText = function () {
+        var width = this.width,
+            height = this.height - this.margin,
+            top = height,
+            left = 0,
+            rectangle = this.document.activeLayer.pathItems.rectangle(
+                top, left, width, height),
+            textFrame = this.document.textFrames.areaText(rectangle),
+            paragraphs = textFrame.paragraphs,
+            characterStyle = this.getCharacterStyle('button'),
+            paragraphStyle = this.getParagraphStyle('button'),
+            i, limit;
 
-		paragraphs.add(this.text);
+        paragraphs.add(this.text);
 
-		for (i = 0, limit = paragraphs.length; i < limit; i += 1) {
-			characterStyle.applyTo(paragraphs[i], true);
-			paragraphStyle.applyTo(paragraphs[i], true);
-		}
-	}
+        for (i = 0, limit = paragraphs.length; i < limit; i += 1) {
+            characterStyle.applyTo(paragraphs[i], true);
+            paragraphStyle.applyTo(paragraphs[i], true);
+        }
+    }
 
-	my.button = function (title, text, size, height, options) {
-		var object = new Button(title, text, size, height, options);
+    my.button = function (title, text, size, height, options) {
+        var object = new Button(title, text, size, height, options);
 
-		object.addDocument();
-	}
+        object.addDocument();
+    }
 
-	my.goldButton = function (title, text, size, height, options) {
-		my.button(title, text, size, height,
-			my.extend({}, gold, options || {}));
-	}
+    my.goldButton = function (title, text, size, height, options) {
+        my.button(title, text, size, height,
+            my.extend({}, gold, options || {}));
+    }
 
-	my.blueButton = function (title, text, size, height, options) {
-		my.button(title, text, size, height,
-			my.extend({}, blue, options || {}));
-	}
+    my.blueButton = function (title, text, size, height, options) {
+        my.button(title, text, size, height,
+            my.extend({}, blue, options || {}));
+    }
 }(CoSS));
