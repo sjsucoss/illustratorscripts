@@ -1,0 +1,19 @@
+{
+  "name": "illustratorscripts",
+  "version": "1.0.0",
+  "description": "Provides JavaScript scripts for guiding Adobe Illustrator",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github_sjsucoss:sjsucoss/illustratorscripts.git"
+  },
+  "author": "Michael T. Wescoat",
+  "license": "ISC",
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-git": "^1.0.4"
+  }
+}
