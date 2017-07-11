@@ -59,7 +59,7 @@ can be achieved by changing the Y Offset to -3 pt.
 This and other .jsx files should be placed in the Startup Scripts folder for
 Illustrator, which should be in one of these locations:
 
-Windows: C:\Program Files\Adobe\Adobe lllustratorCC\Startup Scripts\
+Windows: C:\Program Files\Adobe\Adobe lllustrator CC\Startup Scripts\
 Mac OS:  /Applications/Adobe lllustrator CC/Startup Scripts/
 
 People using other versions of Illustrator may need to change "CC" in the above

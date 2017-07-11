@@ -15,7 +15,7 @@ The `.jsx` scripts are auxiliary files that provide most of the general function
 <table>
 	<tr>
 		<td>Windows:</td>
-		<td>C:\Program Files\Adobe\Adobe lllustratorCC\Startup Scripts\</td>
+		<td>C:\Program Files\Adobe\Adobe lllustrator CC\Startup Scripts\</td>
 	</tr>
 	<tr>
 		<td>Mac OS:</td>
