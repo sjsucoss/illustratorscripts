@@ -23,9 +23,9 @@ var CoSS = this.CoSS || {};
 (function (my) {
     'use strict';
 
-	/*
-	 * Object Manipulation
-	 */ 
+    /*
+     * Object Manipulation
+     */ 
 
     my.extend = function (target) {
         var i, limit, source, key;
@@ -42,25 +42,25 @@ var CoSS = this.CoSS || {};
         return target;
     };
 
-	/*
-	 * Color Stuff
-	 */
+    /*
+     * Color Stuff
+     */
 
-	function clip(n) {
-		return Math.min(Math.max(Math.round(n), 0), 255);
-	}
+    function clip(n) {
+        return Math.min(Math.max(Math.round(n), 0), 255);
+    }
 
-	my.rgb = function (red, green, blue) {
-		var color = new RGBColor();
+    my.rgb = function (red, green, blue) {
+        var color = new RGBColor();
 
-		color.red = clip(red);
-		color.green = clip(green);
-		color.blue = clip(blue);
+        color.red = clip(red);
+        color.green = clip(green);
+        color.blue = clip(blue);
 
-		return color;
-	}
+        return color;
+    }
 
-	my.rgbShift = function (red, green, blue, shift) {
-		return my.rgb(red + shift, green + shift, blue + shift);
-	}
+    my.rgbShift = function (red, green, blue, shift) {
+        return my.rgb(red + shift, green + shift, blue + shift);
+    }
 }(CoSS));
