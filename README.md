@@ -6,7 +6,7 @@ Users should pay close attention to the comments in the scripts gathered here. T
 
 ## js
 
-The `.js` files tend to contain simple invocations of functions from the `.jsx` files, applied to arguments that define the unique aspects of particular buttons (text, size, etc.). To make new buttons, use these files as a starting point and edit the code inside to use a new set of arguments. These files may reside anywhere on the computer running Illustrator. To invoke these scripts in Illustrator, use **File** &gt; **Scripts** &gt; **Other Scripts** and navigate to the location where you have stored the relevant file.
+The `.js` files tend to contain simple invocations of functions from the `.jsx` files, applied to arguments that define the unique aspects of particular buttons (text, size, etc.). To make new buttons, use these files as a starting point, and edit the code inside to use a new set of arguments. These files may reside anywhere on the computer running Illustrator. To invoke these scripts in Illustrator, use **File &gt; Scripts &gt; Other Scripts** and navigate to the location where you have stored the relevant file.
 
 ## jsx
 
