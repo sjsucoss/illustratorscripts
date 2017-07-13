@@ -77,7 +77,7 @@ var CoSS = this.CoSS || {};
             margin: 14,      // Top margin
             red: 218,        // RGB for goldenrod, used as the button's
             green: 165,      //   background color--This matches the vertical
-            blue: 32         //   band on the left-hand side of the page.
+            blue: 32,        //   band on the left-hand side of the page.
             shift: 30,       // How much to +/- for each color in gradients
             textFont: 'MyriadPro-Semibold',
             textRed: 255,    // RGB      (used for button text)
@@ -169,11 +169,11 @@ var CoSS = this.CoSS || {};
             attributes = style.paragraphAttributes;
 
         attributes.justification = Justification.CENTER;
-    }
+    };
 
     Button.prototype.getParagraphStyle = function (name) {
         return this.document.paragraphStyles.getByName(name);
-    }
+    };
 
     Button.prototype.setLayer = function (name) {
         if (this.document.layers.length == 0) {
@@ -183,7 +183,7 @@ var CoSS = this.CoSS || {};
     };
 
     Button.prototype.addLayer = function (name) {
-        var layer = this.document.layers.add()
+        var layer = this.document.layers.add();
 
         layer.name = name;
     };
@@ -209,7 +209,7 @@ var CoSS = this.CoSS || {};
         rectangle.fillColor = this.gradientColor(type);
         rectangle.rotate(-90, false, false,
             true, false, Transformation.CENTER);
-    }
+    };
 
     Button.prototype.addText = function () {
         var width = this.width,
@@ -230,21 +230,22 @@ var CoSS = this.CoSS || {};
             characterStyle.applyTo(paragraphs[i], true);
             paragraphStyle.applyTo(paragraphs[i], true);
         }
-    }
+    };
 
     my.button = function (title, text, size, height, options) {
         var object = new Button(title, text, size, height, options);
 
         object.addDocument();
-    }
+    };
 
     my.goldButton = function (title, text, size, height, options) {
         my.button(title, text, size, height,
             my.extend({}, gold, options || {}));
-    }
+    };
 
     my.blueButton = function (title, text, size, height, options) {
         my.button(title, text, size, height,
             my.extend({}, blue, options || {}));
-    }
+    };
+
 }(CoSS));

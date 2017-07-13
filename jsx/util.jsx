@@ -58,9 +58,10 @@ var CoSS = this.CoSS || {};
         color.blue = clip(blue);
 
         return color;
-    }
+    };
 
     my.rgbShift = function (red, green, blue, shift) {
         return my.rgb(red + shift, green + shift, blue + shift);
-    }
+    };
+
 }(CoSS));

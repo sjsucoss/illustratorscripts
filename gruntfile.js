@@ -36,12 +36,20 @@ module.exports = function (grunt) {
           cwd: directory
         }
       }
+    },
+
+    jshint: {
+      files: {
+        src: ["jsx/**/*.jsx", "js/**/*.js"]
+      }
     }
 
   });
 
+  grunt.loadNpmTasks("grunt-contrib-jshint");
   grunt.loadNpmTasks("grunt-git");
 
   grunt.registerTask("git", ["gitadd", "gitcommit", "gitpush"]);
+  grunt.registerTask("default", ["jshint"]);
 };
 
