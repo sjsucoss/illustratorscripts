@@ -5,6 +5,20 @@ module.exports = function (grunt) {
 
   grunt.initConfig({
 
+    copy: {
+      main: {
+        files: [
+          // includes files within path
+          {
+            expand: true,
+            cwd: 'jsx/',
+            src: '*',
+            dest: "/Applications/Adobe Illustrator CC/Startup Scripts/",
+            filter: "isFile"
+          }
+        ],
+      },
+    },
 
     // git add .
     gitadd: {
@@ -40,16 +54,25 @@ module.exports = function (grunt) {
 
     jshint: {
       files: {
-        src: ["jsx/**/*.jsx", "js/**/*.js"]
+        src: ["gruntfile.js", "jsx/*.jsx", "js/*.js"]
+      }
+    },
+
+    watch: {
+      js: {
+        files: ["jsx/*.jsx", "js/*.js"],
+        tasks: ["jshint", "copy"]
       }
     }
 
   });
 
+  grunt.loadNpmTasks("grunt-contrib-copy");
   grunt.loadNpmTasks("grunt-contrib-jshint");
+  grunt.loadNpmTasks("grunt-contrib-watch");
   grunt.loadNpmTasks("grunt-git");
 
   grunt.registerTask("git", ["gitadd", "gitcommit", "gitpush"]);
-  grunt.registerTask("default", ["jshint"]);
+  grunt.registerTask("default", ["watch"]);
 };
 
