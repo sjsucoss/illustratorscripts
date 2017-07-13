@@ -74,5 +74,6 @@ module.exports = function (grunt) {
 
   grunt.registerTask("git", ["gitadd", "gitcommit", "gitpush"]);
   grunt.registerTask("default", ["watch"]);
+
 };
 
